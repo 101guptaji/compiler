@@ -1,0 +1,5 @@
+%%
+
+"hello"		{printf("good bye");}
+		;
+%%
