@@ -8,9 +8,9 @@ int yylex();
 #define INT_MAX 9999999
 char s[52][100];
 int t[52];
-void symbval(char *symbol, int val);
-void symbvalin(char *symbol, int val);
-int chectyp(char *symbol);
+void symbval(char *symbol, int val);  //check the data type of the variable and value and  assign pr change the value to that variable
+void symbvalin(char *symbol, int val); //check the previous declaration of the variable and assigning value to that variable
+int chectyp(char *symbol); //check for variable whether is declared or not
 extern int yylineno;
 int cp=0;
 %}
@@ -105,13 +105,14 @@ void symbval(char *sy, int val)
 			if(strcmp(sy,s[i])==0)
          {
 				f=1;
-				strcpy(s[i],sy);
+				t[i]=val;
 				break;
   			}
 		}
 
 	if(f==0)
-      printf("Error: Line %d -> '%s' undeclared\n",yylineno,sy);
+		printf("Error: Line %d -> '%s' undeclared\n",yylineno,sy);
+	
 }
 void symbvalin(char *sy, int val)
 {
@@ -145,7 +146,7 @@ int chectyp(char *sy)
 		}			
 	}
   	if(v==0)
-   	printf("Error: Line %d -> Variable undeclared!!\n",yylineno);
+		printf("Error: Line %d -> Variable undeclared!!\n",yylineno);
 }
 
 
@@ -165,4 +166,6 @@ int main (void)
 
 void yyerror (char *s) {fprintf (stderr, "%s\n", s);}
 
-
+/*
+* Submitted by Himanshu Gupta
+*/
